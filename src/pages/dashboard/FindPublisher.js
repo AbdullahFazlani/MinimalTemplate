@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 import { useSettingsContext } from '../../components/settings';
 import { MultipleSelect } from '../../components/select/index';
 
-// ----------------------------------------------------------------------
+// ---------------------------------------------------------------------- //
 
 export default function BlankPage() {
   const { themeStretch } = useSettingsContext();
@@ -57,7 +57,7 @@ export default function BlankPage() {
             border: (theme) => `dashed 1px ${theme.palette.divider}`,
           }}
         >
-          <FormControl component="fieldset">
+          <FormControl component="fieldset" sx={{ width: '100%' }}>
             {/* <FormGroup aria-label="position" row className="publisher-tabs">
               <FormControlLabel
                 value="All"
@@ -120,7 +120,7 @@ export default function BlankPage() {
                 labelPlacement="end"
               />
             </FormGroup> */}
-            <Box sx={{ width: '100%', mb: 4 }}>
+            {/* <Box sx={{ width: '100%', mb: 4 }}>
               <ToggleButtonGroup value={formats} onChange={handleFormat}>
                 <ToggleButton value="bold">Analytics</ToggleButton>
                 <ToggleButton value="italic">Customer Service</ToggleButton>
@@ -133,8 +133,8 @@ export default function BlankPage() {
                 <ToggleButton value="CMP">CMP</ToggleButton>
                 <ToggleButton value="ALL">ALL</ToggleButton>
               </ToggleButtonGroup>
-            </Box>
-            <FormGroup>
+            </Box> */}
+            <FormGroup sx={{ width: '100%' }}>
               <MultipleSelect name={names} select_key="name" />
             </FormGroup>
             {/* <FormGroup>
