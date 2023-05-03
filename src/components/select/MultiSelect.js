@@ -11,8 +11,20 @@ import FormGroup from '@mui/material/FormGroup';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { Box, Input, InputAdornment, InputLabel, Slider, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Input,
+  InputAdornment,
+  InputLabel,
+  Slider,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -38,451 +50,238 @@ const names = [
   'Kelly Snyder',
 ];
 
-function valuetext(value) {
-  return `${value}°C`;
-}
+// function valuetext(value) {
+//   return `${value}°C`;
+// }
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+// function getStyles(name, personName, theme) {
+//   return {
+//     fontWeight:
+//       personName.indexOf(name) === -1
+//         ? theme.typography.fontWeightRegular
+//         : theme.typography.fontWeightMedium,
+//   };
+// }
 
 export default function MultipleSelect() {
-  const theme2 = useTheme();
-  const [personName, setPersonName] = React.useState([]);
-  const [age, setAge] = React.useState('');
+  // const theme2 = useTheme();
+  // const [personName, setPersonName] = React.useState([]);
+  // const [age, setAge] = React.useState('');
 
-  const handleChange2 = (event) => {
-    setAge(event.target.value);
-  };
+  // const handleChange2 = (event) => {
+  //   setAge(event.target.value);
+  // };
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    padding: theme.spacing(1),
-    textAlign: 'center',
-  }));
+  // const Item = styled(Paper)(({ theme }) => ({
+  //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  //   padding: theme.spacing(1),
+  //   textAlign: 'center',
+  // }));
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    );
-  };
+  // const handleChange = (event) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setPersonName(
+  //     // On autofill we get a stringified value.
+  //     typeof value === 'string' ? value.split(',') : value
+  //   );
+  // };
 
-  const [value, setValue] = React.useState([20, 37]);
+  // const [value, setValue] = React.useState([20, 37]);
 
-  const handleSelectChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  // const handleSelectChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
 
   // for country select options
 
-  const [country, setCountry] = React.useState('');
+  // const [country, setCountry] = React.useState('');
 
-  const handleCountryChange = (event) => {
-    setCountry(event.target.value);
-  };
+  // const handleCountryChange = (event) => {
+  //   setCountry(event.target.value);
+  // };
 
-  // for site select options
+  // // for site select options
 
-  const [siteCat, setSiteCat] = React.useState('');
+  // const [siteCat, setSiteCat] = React.useState('');
 
-  const handleSiteChange = (event) => {
-    setSiteCat(event.target.value);
-  };
+  // const handleSiteChange = (event) => {
+  //   setSiteCat(event.target.value);
+  // };
 
   // for site language select options
 
-  const [siteLang, setSiteLang] = React.useState('');
+  // const [siteLang, setSiteLang] = React.useState('');
 
-  const handleSiteLangChange = (event) => {
-    setSiteLang(event.target.value);
+  // const handleSiteLangChange = (event) => {
+  //   setSiteLang(event.target.value);
+  // };
+  const [checked, setChecked] = React.useState([true, false]);
+
+  const handleChange1 = (event) => {
+    setChecked([event.target.checked, event.target.checked]);
   };
 
-  return (
-    <div>
-      <Grid container rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 6 }}>
-        <Grid item xs={12}>
-          <FormControl variant="standard">
-            <InputLabel htmlFor="input-with-icon-adornment">Domain Search</InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              startAdornment={
-                <InputAdornment position="start">
-                  <SearchOutlinedIcon />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <Box sx={{ width: '50%' }}>
-            <Typography id="input-slider" gutterBottom>
-              Page Views
-            </Typography>
-            <Slider
-              getAriaLabel={() => 'Temperature range'}
-              value={value}
-              onChange={handleSelectChange}
-              valueLabelDisplay="auto"
-              getAriaValueText={valuetext}
-              id="input-slider"
-              step={10}
-              marks
-              min={10}
-              max={110}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Box
-            sx={{
-              border: '2px solid lightgray',
-              borderRadius: '7px',
-              padding: '5px',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Box sx={{ width: '70%' }}>
-              <FormControl fullWidth>
-                <InputLabel id="select-country">Select Country</InputLabel>
-                <Select
-                  labelId="select-country"
-                  id="select-country"
-                  value={country}
-                  label="Select Country"
-                  onChange={handleCountryChange}
-                  fullWidth
-                >
-                  <MenuItem value="USA">USA</MenuItem>
-                  <MenuItem value="UK">UK</MenuItem>
-                  <MenuItem value="France">France</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={{ width: '25%', display: 'flex', alignItems: 'center' }}>
-              <FormControl fullWidth size="small">
-                <Select
-                  labelId="select-include"
-                  id="select-include"
-                  // value={country}
-                  // label="Select Country"
-                  // onChange={handleCountryChange}
-                  defaultValue="Include"
-                >
-                  <MenuItem value="include">Include</MenuItem>
-                  <MenuItem value="exclude">Exclude</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Box
-            sx={{
-              border: '2px solid lightgray',
-              borderRadius: '7px',
-              padding: '5px',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Box sx={{ width: '70%' }}>
-              <FormControl fullWidth>
-                <InputLabel id="select-site">Select Site Category</InputLabel>
-                <Select
-                  labelId="select-site"
-                  id="select-site"
-                  value={siteCat}
-                  label="Select Site Category"
-                  onChange={handleSiteChange}
-                  fullWidth
-                >
-                  <MenuItem value="Animations">Animations</MenuItem>
-                  <MenuItem value="Comics">Comics</MenuItem>
-                  <MenuItem value="Arts">Arts</MenuItem>
-                  <MenuItem value="Humor">Humor</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={{ width: '25%', display: 'flex', alignItems: 'center' }}>
-              <FormControl fullWidth size="small">
-                <Select
-                  labelId="select-include"
-                  id="select-include"
-                  // value={country}
-                  // label="Select Country"
-                  // onChange={handleCountryChange}
-                  defaultValue="Include"
-                >
-                  <MenuItem value="include">Include</MenuItem>
-                  <MenuItem value="exclude">Exclude</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Box
-            sx={{
-              border: '2px solid lightgray',
-              borderRadius: '7px',
-              padding: '5px',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Box sx={{ width: '70%' }}>
-              <FormControl fullWidth>
-                <InputLabel id="select-site-lang">Select Site Language</InputLabel>
-                <Select
-                  labelId="select-site-lang"
-                  id="select-site-lang"
-                  value={siteLang}
-                  label="Select Site Category"
-                  onChange={handleSiteLangChange}
-                  fullWidth
-                >
-                  <MenuItem value="English">English</MenuItem>
-                  <MenuItem value="Arabic">Arabic</MenuItem>
-                  <MenuItem value="Greek">Greeek</MenuItem>
-                  <MenuItem value="French">French</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={{ width: '25%', display: 'flex', alignItems: 'center' }}>
-              <FormControl fullWidth size="small">
-                <Select
-                  labelId="select-include"
-                  id="select-include"
-                  // value={country}
-                  // label="Select Country"
-                  // onChange={handleCountryChange}
-                  defaultValue="Include"
-                >
-                  <MenuItem value="include">Include</MenuItem>
-                  <MenuItem value="exclude">Exclude</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Box
-            sx={{
-              border: '2px solid lightgray',
-              borderRadius: '7px',
-              padding: '5px',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Box sx={{ width: '100%' }}>
-              <FormControl fullWidth>
-                <InputLabel id="select-site-lang">Select Site Language</InputLabel>
-                <Select
-                  labelId="select-site-lang"
-                  id="select-site-lang"
-                  value={siteLang}
-                  label="Select Site Category"
-                  onChange={handleSiteLangChange}
-                  fullWidth
-                >
-                  <MenuItem value="English">English</MenuItem>
-                  <MenuItem value="Arabic">Arabic</MenuItem>
-                  <MenuItem value="Greek">Greeek</MenuItem>
-                  <MenuItem value="French">French</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Box>
-        </Grid>
-        {/* <Grid item xs={4}>
-          <Item>
-            <FormControl sx={{ m: 1, width: 300 }}>
-              <InputLabel id="demo-multiple-name-label">Name</InputLabel>
-              <Select
-                labelId="demo-multiple-name-label"
-                id="demo-multiple-name"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                input={<OutlinedInput label="Name" />}
-                MenuProps={MenuProps}
-              >
-                {names.map((name) => (
-                  <MenuItem key={name} value={name} style={getStyles(name, personName, theme2)}>
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="demo-select-small-label">Age</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={age}
-                label="Age"
-                onChange={handleChange2}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-          </Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>
-            <FormControl>
-              <FormControlLabel
-                value="Must appear on homepage"
-                control={<Checkbox />}
-                label="Must appear on homepage"
-                labelPlacement="end"
-              />
-              <FormControlLabel
-                value="Search in Ads.txt"
-                control={<Checkbox />}
-                label="Search in Ads.txt"
-                labelPlacement="end"
-              />
-            </FormControl>
-          </Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>
-            <FormControl sx={{ m: 1, width: 300 }}>
-              <InputLabel id="demo-multiple-name-label">Name</InputLabel>
-              <Select
-                labelId="demo-multiple-name-label"
-                id="demo-multiple-name"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                input={<OutlinedInput label="Name" />}
-                MenuProps={MenuProps}
-              >
-                {names.map((name) => (
-                  <MenuItem key={name} value={name} style={getStyles(name, personName, theme2)}>
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="demo-select-small-label">Age</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={age}
-                label="Age"
-                onChange={handleChange2}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-          </Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>
-            <FormControl>
-              <FormControlLabel
-                value="Must appear on homepage"
-                control={<Checkbox />}
-                label="Must appear on homepage"
-                labelPlacement="end"
-              />
-              <FormControlLabel
-                value="Search in Ads.txt"
-                control={<Checkbox />}
-                label="Search in Ads.txt"
-                labelPlacement="end"
-              />
-            </FormControl>
-          </Item>
-        </Grid>
-        <Grid item xs={12}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={12}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={2}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={2}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={2}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={2}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={2}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={2}>
-          <Item>1</Item>
-        </Grid>
+  const handleChange2 = (event) => {
+    setChecked([event.target.checked, checked[1]]);
+  };
 
-        <Grid item xs={3}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item>1</Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item>1</Item>
-        </Grid> */}
-      </Grid>
+  const handleChange3 = (event) => {
+    setChecked([checked[0], event.target.checked]);
+  };
+  return (
+    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <TextField
+          label="Domain Search"
+          id="outlined-start-adornment"
+          sx={{
+            m: 1,
+            backgroundColor: '#fff',
+            width: '20%',
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchOutlinedIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </div>
+      <div>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Select Country</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <div>
+                <FormControlLabel
+                  label="Select All"
+                  control={
+                    <Checkbox
+                      checked={checked[0] && checked[1]}
+                      indeterminate={checked[0] !== checked[1]}
+                      onChange={handleChange1}
+                    />
+                  }
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
+                  <FormControlLabel
+                    label="USA"
+                    control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
+                  />
+                  <FormControlLabel
+                    label="UK"
+                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
+                  />
+                  <FormControlLabel
+                    label="Pakistan"
+                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
+                  />
+                </Box>
+              </div>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+      <div>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Select Site Category</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <div>
+                <FormControlLabel
+                  label="Select All"
+                  control={
+                    <Checkbox
+                      checked={checked[0] && checked[1]}
+                      indeterminate={checked[0] !== checked[1]}
+                      onChange={handleChange1}
+                    />
+                  }
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
+                  <FormControlLabel
+                    label="Arts"
+                    control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
+                  />
+                  <FormControlLabel
+                    label="Entertainment"
+                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
+                  />
+                  <FormControlLabel
+                    label="Humour"
+                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
+                  />
+                </Box>
+              </div>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+      <div>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Select Site language</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <div>
+                <FormControlLabel
+                  label="Select All"
+                  control={
+                    <Checkbox
+                      checked={checked[0] && checked[1]}
+                      indeterminate={checked[0] !== checked[1]}
+                      onChange={handleChange1}
+                    />
+                  }
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
+                  <FormControlLabel
+                    label="English"
+                    control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
+                  />
+                  <FormControlLabel
+                    label="German"
+                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
+                  />
+                  <FormControlLabel
+                    label="French"
+                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
+                  />
+                </Box>
+              </div>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </div>
   );
 }
