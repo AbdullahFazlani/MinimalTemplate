@@ -113,7 +113,7 @@ export function AuthProvider({ children }) {
 
   // LOGIN
   const login = useCallback(async (email, password) => {
-    const response = await axios.post('/api/account/login', {
+    const response = await axios.post('https://api-dev-minimal-v4.vercel.app/api/account/login', {
       email,
       password,
     });

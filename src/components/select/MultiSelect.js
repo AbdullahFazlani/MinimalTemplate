@@ -13,6 +13,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+
 import {
   Accordion,
   AccordionDetails,
@@ -26,6 +27,9 @@ import {
   Typography,
 } from '@mui/material';
 
+import FieldCheckbox from './section/FieldCheckbox';
+import Selection from './section/Selection';
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -38,6 +42,20 @@ const MenuProps = {
 };
 
 const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder',
+];
+
+
+const checkbox_items = [
   'Oliver Hansen',
   'Van Henry',
   'April Tucker',
@@ -132,6 +150,7 @@ export default function MultipleSelect() {
   };
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <TextField
           label="Domain Search"
@@ -151,45 +170,20 @@ export default function MultipleSelect() {
         />
       </div>
       <div>
+      
         <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Select Country</Typography>
+            <Typography>Select Country </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <div>
-                <FormControlLabel
-                  label="Select All"
-                  control={
-                    <Checkbox
-                      checked={checked[0] && checked[1]}
-                      indeterminate={checked[0] !== checked[1]}
-                      onChange={handleChange1}
-                    />
-                  }
-                />
-                <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
-                  <FormControlLabel
-                    label="USA"
-                    control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
-                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
-                  />
-                  <FormControlLabel
-                    label="UK"
-                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
-                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
-                  />
-                  <FormControlLabel
-                    label="Pakistan"
-                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
-                    sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px' }}
-                  />
-                </Box>
-              </div>
+              <FieldCheckbox items={checkbox_items} />
+              <Selection field="country" items={names} />
+              <Selection field="country2" items={names} />
             </Typography>
           </AccordionDetails>
         </Accordion>
