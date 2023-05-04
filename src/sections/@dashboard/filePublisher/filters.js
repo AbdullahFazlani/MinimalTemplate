@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import Iconify from '../../../components/iconify';
 import { MultipleSelect } from '../../../components/select';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -61,9 +62,15 @@ export default function CustomizedDialogs() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open dialog
-      </Button>
+        <Button
+          color="success"
+          sx={{ flexShrink: 0 }}
+          onClick={handleClickOpen}
+          startIcon={<Iconify icon="material-symbols:filter-alt" />}
+        >
+          Filters
+        </Button>
+        
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
