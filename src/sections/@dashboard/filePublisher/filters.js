@@ -78,14 +78,22 @@ export default function CustomizedDialogs() {
         fullWidth='md'
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modal title
+          Filters
         </BootstrapDialogTitle>
         <DialogContent dividers>
               <MultipleSelect />
         </DialogContent>
         <DialogActions>
+        <Button
+          color="error"
+          sx={{ flexShrink: 0 }}
+          startIcon={<Iconify icon="eva:trash-2-outline" />}
+        >
+          Clear
+        </Button>
+
           <Button autoFocus onClick={handleClose}>
-            Save changes
+            Show 32 results
           </Button>
         </DialogActions>
       </BootstrapDialog>

@@ -13,7 +13,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-
+import Divider from '@mui/material/Divider';
 import {
   Accordion,
   AccordionDetails,
@@ -32,8 +32,13 @@ import {
   Typography,
 } from '@mui/material';
 
+
+
 import FieldCheckbox from './section/FieldCheckbox';
 import Selection from './section/Selection';
+import AutoComplete from './section/AutoComplete';
+import SingleSelect from './section/SingleSelect';
+import RadioField from './section/Radio';
 import RangeSlider from './section/Slider';
 
 const ITEM_HEIGHT = 48;
@@ -57,7 +62,7 @@ const names = [
   'Miriam Wagner',
   'Bradley Wilkerson',
   'Virginia Andrews',
-  'Kelly Snyder',
+  'Kelly Snyder'
 ];
 
 const checkbox_items = [
@@ -70,12 +75,132 @@ const checkbox_items = [
   'Miriam Wagner',
   'Bradley Wilkerson',
   'Virginia Andrews',
-  'Kelly Snyder',
+  'Kelly Snyder'
 ];
 
-// function valuetext(value) {
-//   return `${value}°C`;
-// }
+const countries = [
+  "Afghanistan",
+	"Albania",
+	"Algeria",
+  'United kingdom',
+  'Pakistan',
+  'India'
+  
+];
+
+const site_categories = [
+  'Arts and Entertainment',
+  'Animation and Comics',
+  'Humor'
+];
+
+const site_lang = [
+  'English',
+  'Spanish',
+  'chinese',
+  'Urdu',
+  'Sindhi'
+];
+
+
+const traffic_source = [
+  'Minimum %',
+  'Maximum %',
+  'Direct %',
+  'Social %'
+];
+
+const other_filter = [
+  'Keyword Search',
+  'Has Articles',
+  'Has Infinite Scroll',
+  'Supports AMP'
+];
+
+const loading_experience = [
+  'Slow',
+  'Average',
+  'Fast',
+];
+
+
+const tld = [
+  '.abbott',
+  '.com',
+  '.in',
+  '.pk',
+  '.academy',
+  '.edu',
+];
+
+
+
+
+
+
+const marks = [
+  {
+    value: 0,
+    label: '0',
+  },
+  {
+    value: 10,
+    label: '50k',
+  },
+  {
+    value: 20,
+    label: '100k',
+  },
+  {
+    value: 30,
+    label: '500k',
+  },
+  {
+    value: 40,
+    label: '1m',
+  },
+  {
+    value: 50,
+    label: '3m',
+  },
+  {
+    value: 60,
+    label: '5m',
+  },
+  {
+    value: 70,
+    label: '10m',
+  },
+  {
+    value: 80,
+    label: '25m',
+  },
+  {
+    value: 90,
+    label: '50m',
+  },
+  {
+    value: 100,
+    label: '100m',
+  },
+  {
+    value: 110,
+    label: '200m',
+  },
+  {
+    value: 120,
+    label: '500m',
+  },
+  {
+    value: 130,
+    label: '1b+',
+  }
+];
+
+
+function valuetext(value) {
+  return `${value}°C`;
+}
 
 // function getStyles(name, personName, theme) {
 //   return {
@@ -111,11 +236,11 @@ export default function MultipleSelect() {
   //   );
   // };
 
-  // const [value, setValue] = React.useState([20, 37]);
+  const [value, setValue] = React.useState([20, 37]);
 
-  // const handleSelectChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
+  const handleSelectChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   // for country select options
 
@@ -159,49 +284,209 @@ export default function MultipleSelect() {
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
+
+  const [traffic_search, set_traffic_search] = React.useState('');
+
+  const trafficHandle = (event, newAlignment) => {
+    set_traffic_search(newAlignment);
+  };
+
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <TextField
-          label="Domain Search"
-          id="outlined-start-adornment"
-          sx={{
-            m: 1,
-            backgroundColor: '#fff',
-            width: '40%',
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchOutlinedIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </div>
-      <div>
-        <RangeSlider />
-      </div>
+      
 
-      <div style={{ border: '1px solid grey', borderRadius: '10px' }}>
-        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}>
+      <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }} expanded>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Select Country </Typography>
+            <Typography>Page Views</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              <FieldCheckbox items={checkbox_items} />
-              <Selection field="country" items={names} />
-              <Selection field="country2" items={names} />
+            <Typography sx={{textAlign:'center'}}>
+              <Slider  sx={{width:'90%', textAlign:'center'}}
+                getAriaLabel={() => 'Temperature range'}
+                value={value}
+                onChange={handleSelectChange}
+                getAriaValueText={valuetext}
+                id="input-slider"
+                step={10}
+                marks={marks}
+                min={10}
+                max={110}
+              />              
             </Typography>
           </AccordionDetails>
         </Accordion>
       </div>
-      <div style={{ border: '1px solid grey', borderRadius: '10px' }}>
+
+
+      <Divider />
+
+      <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}  expanded>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Select Technology </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <AutoComplete  field="technology" items={countries} defaults={[]}/>
+              <Typography sx={{marginTop:'20px'}}>Compound</Typography>
+              <RadioField field="technology" items={['and', 'or', 'only']} value1='and' />
+              <Typography sx={{marginTop:'20px'}}>With</Typography>
+              <FieldCheckbox field="technology" items={['Must appear on homepage', 'Search in Ads.txt']} />
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      <Divider />
+
+       <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }} expanded>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header1"
+          >
+            <Typography>Select Country </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <AutoComplete  field="countries" items={countries} defaults={[]}/>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      <Divider />
+
+       <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }} expanded>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header2"
+          >
+            <Typography>Select Site Category </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <AutoComplete field="Site category" items={site_categories} />
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      <Divider />
+
+       <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }} >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header3"
+          >
+            <Typography>Select Site Language </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <FieldCheckbox items={site_lang} />
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      <Divider />
+
+
+       <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }} >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header4"
+          >
+            <Typography>Traffic Source Filter </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <FieldCheckbox items={traffic_source} />
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      <Divider />
+
+      <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }} >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header5"
+          >
+            <Typography>Geo Traffic Search</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <SingleSelect field='Select Traffic location' items={countries} trafficHandle={trafficHandle} />
+            </Typography>
+            {(traffic_search !== '' ? 
+            <Typography sx={{marginTop:'20px'}}> 
+              <RadioField field="tier_traffic" items={[`Traffic From ${traffic_search} (0-100)`, `Pageviews From ${traffic_search}`]} />
+              <Typography sx={{marginTop:'20px'}}> 
+                <AutoComplete  field="Ignore countries" items={countries} defaults={[]} />
+              </Typography>
+              
+            </Typography>
+            : null)}
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      <Divider />
+
+
+
+      <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
+        <Accordion sx={{ width: '100%', backgroundColor: '#fff' }} >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header5"
+          >
+            <Typography>Other</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+          <Typography>Select Ads Text</Typography>
+            <RadioField field="has_adstxt" items={['Yes', 'No']} />
+
+            <Divider variant='middle' sx={{marginTop:'20px', marginBottom:'20px'}} />
+
+            <Typography sx={{marginTop:'20px'}}>Loading Experince</Typography>
+            <FieldCheckbox field="loading_experience" items={loading_experience} />
+
+            <Divider variant='middle' sx={{marginTop:'20px', marginBottom:'20px'}} />
+
+            <Typography sx={{marginTop:'20px'}}>Select TLD</Typography>
+            <AutoComplete field="tld" items={tld} />
+
+            <Divider variant='middle' sx={{marginTop:'20px', marginBottom:'20px'}} />
+
+            <FieldCheckbox field="has_adstxt" items={other_filter} />
+
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      {/* <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
         <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -245,7 +530,7 @@ export default function MultipleSelect() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <div style={{ border: '1px solid grey', borderRadius: '10px' }}>
+       <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
         <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -289,7 +574,7 @@ export default function MultipleSelect() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <div style={{ border: '1px solid grey', borderRadius: '10px' }}>
+      <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
         <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -333,7 +618,7 @@ export default function MultipleSelect() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <div style={{ border: '1px solid grey', borderRadius: '10px' }}>
+      <div style={{ border: '1px solid #8080800d', borderRadius: '10px' }}>
         <Accordion sx={{ width: '100%', backgroundColor: '#fff' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -376,20 +661,16 @@ export default function MultipleSelect() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-      </div>
+      </div> 
+
+
+      
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-        <FormControl>
-          <FormLabel id="demo-row-radio-buttons-group-label">Publisher Network</FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-            <FormControlLabel value="Only" control={<Radio />} label="Only" />
-          </RadioGroup>
+      <FormControl sx={{}}>
+          <FormLabel>Select Ads Text</FormLabel>
+            <RadioField field="has_adstxt" items={['Installed', 'Not Installed']} />
         </FormControl>
+
         <FormControl>
           <FormLabel id="outlined-basic">Publisher Views</FormLabel>
           <TextField id="outlined-basic" variant="outlined" type="number" size="small" />
@@ -439,6 +720,8 @@ export default function MultipleSelect() {
         <FormControlLabel control={<Checkbox defaultChecked />} label="Ignore DNS Server Sites" />
         <FormControlLabel control={<Checkbox defaultChecked />} label="Support AMP" />
       </FormGroup>
+
+      */}
     </div>
   );
 }

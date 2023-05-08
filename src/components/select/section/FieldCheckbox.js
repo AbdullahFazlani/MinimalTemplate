@@ -8,7 +8,7 @@ import FormLabel from '@mui/material/FormLabel';
 
 
 FieldCheckbox.propTypes = {
-  items: PropTypes.object
+  items: PropTypes.array
 };
 
 export default function FieldCheckbox({items}) {  
@@ -16,7 +16,7 @@ export default function FieldCheckbox({items}) {
     <FormControl component="fieldset">
       <FormGroup aria-label="position" row>
       {items.map((item) => (
-          <FormControlLabel
+          <FormControlLabel sx={{ border: '1px solid gray', borderRadius: '20px', pr: '10px', margin:'5px' }}
           value={item}
           control={<Checkbox />}
           label={item}
